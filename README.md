@@ -6,10 +6,7 @@
 
 **Note:** mention @bot_witty only under a tweet like below example.
 
-![example](./images/this.png)
-
-
-###
+<img src="images/this.png"  width=40% height=40%>
 
 ---
 
