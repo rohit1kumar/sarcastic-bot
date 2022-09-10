@@ -2,9 +2,9 @@
   "name": "sarcasm-bot",
   "version": "1.0.0",
   "description": "replies with sarcastic reply ",
-  "main": "index.js",
+  "main": "index.mjs",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.mjs"
   },
   "author": "",
   "license": "ISC",
