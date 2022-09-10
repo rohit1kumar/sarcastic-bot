@@ -2,9 +2,9 @@
   "name": "sarcasm-bot",
   "version": "1.0.0",
   "description": "replies with sarcastic reply ",
-  "main": "app.js",
+  "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,5 +15,3 @@
     "twitter-api-sdk": "^1.1.0"
   }
 }
-
- 
