@@ -3,6 +3,7 @@ import Twit from "twit";
 import dotenv from "dotenv";
 dotenv.config();
 import { Configuration, OpenAIApi } from "openai";
+import fs from "fs/promises";
 
 /*################################## TWITTER API #########################################*/
 const config = {
@@ -13,7 +14,7 @@ const config = {
     timeout_ms: 60 * 1000,
     strictSSL: true,
 };
-const T = new Twit(config);     
+const T = new Twit(config);
 
 const client = new Client(process.env.TWITTER_BEARER_TOKEN); //twitter api client
 
@@ -112,10 +113,20 @@ async function getMentionedTweet() {
 
         for await (const response of stream) {
             if (response.data.text.includes(`@${botName}`)) { //check if the tweet contains the bot's username
-                const tweet = JSON.stringify(response.includes.tweets[0].text, null, 2).replace(/(https?:\/\/[^\s]+)/g, '').replace(/"/g, '').trim(); //remove the urls and double quotes from the tweet and trim the spaces
 
-                const joke = await getJoke(tweet); //get the joke from the openai api
-                await replyToTweet(joke, response.data.author_id, response.data.id); // reply to the
+                /* IF BOT IS MENTIONED **IN** THE TWEET */
+                if (response.includes.tweets === undefined) { //check if the tweet is a reply to another tweet
+                    const tweet = JSON.stringify(response.data.text, null, 2).replace(/(https?:\/\/[^\s]+)/g, '').replace(/"/g, '').trim();
+                    const joke = await getJoke(tweet);
+                    await replyToTweet(joke, response.data.author_id, response.data.id);
+                } else {
+                    /* IF BOT IS MENTIONED **UNDER** THE TWEET THEN IT WILL REPLY TO WHOEVER MENTIONED
+                        THE BOT BUT WILL TAKE QUESTIONS FROM THE ORIGINAL AUTHORS TWEET */
+                        
+                    const tweet = JSON.stringify(response.includes.tweets[0].text, null, 2).replace(/(https?:\/\/[^\s]+)/g, '').replace(/"/g, '').trim(); //remove the urls and double quotes from the tweet and trim the spaces
+                    const joke = await getJoke(tweet); //get the joke from the openai api
+                    await replyToTweet(joke, response.data.author_id, response.data.id); // reply to the
+                }
             }
         }
     } catch (error) {
