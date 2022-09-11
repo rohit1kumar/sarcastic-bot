@@ -4,9 +4,11 @@
 ### This bot reluctantly answer with sarcastic responses. Uses OpenAI's [GPT-3 API](https://beta.openai.com/playground/p/default-marv-sarcastic-chat) to generate the comments. Hosted on [Heroku](https://www.heroku.com/), and uses [offcial Twitter SDK](https://github.com/twitterdev/twitter-api-typescript-sdk) to interact with Twitter.
 
 
-**Note:** mention @bot_witty only under a tweet like below example.
+**Note:** mention `@bot_witty` in a tweet or under a tweet like below example.
 
-<img src="images/this.png"  width=40% height=40%>
+<img src="https://i.imgur.com/kxUPBrm.png"  width=45% height=45%>
+<img src="https://i.imgur.com/l34nAn6.png"  width=45% height=45%>
+
 
 ---
 
