@@ -62,6 +62,7 @@ async function replyToTweet(joke, author_id, id) {
     }
 }
 
+
 /*############################# GET THE TWEETS FROM TWITTER API  ##########################*/
 
 async function getExitingRule() {   //get the existing rules
@@ -77,12 +78,17 @@ async function deleteAndSetNewRules() {     //delete the existing rules and set 
 
     try {
         const rules = await getExitingRule();
-        const ids = rules.data.map((rule) => rule.id);
-        await client.tweets.addOrDeleteRules({
-            delete: {
-                ids: ids,
-            }
-        });
+        // if rules includes id in data then delete the rules
+        if (rules.data) {
+            console.log("rule exists, now deleting");
+            const ids = rules.data.map((rule) => rule.id);
+            await client.tweets.addOrDeleteRules({
+                delete: {
+                    ids: ids,
+                }
+            });
+        }
+        console.log("setting new rules");
         await client.tweets.addOrDeleteRules({
             add: [
                 {
@@ -122,7 +128,7 @@ async function getMentionedTweet() {
                 } else {
                     /* IF BOT IS MENTIONED **UNDER** THE TWEET THEN IT WILL REPLY TO WHOEVER MENTIONED
                         THE BOT BUT WILL TAKE QUESTIONS FROM THE ORIGINAL AUTHORS TWEET */
-                        
+
                     const tweet = JSON.stringify(response.includes.tweets[0].text, null, 2).replace(/(https?:\/\/[^\s]+)/g, '').replace(/"/g, '').trim(); //remove the urls and double quotes from the tweet and trim the spaces
                     const joke = await getJoke(tweet); //get the joke from the openai api
                     await replyToTweet(joke, response.data.author_id, response.data.id); // reply to the
