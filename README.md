@@ -3,8 +3,9 @@
 
 ### This bot reluctantly answer with sarcastic responses. Uses OpenAI's [GPT-3 API](https://beta.openai.com/playground/p/default-marv-sarcastic-chat) to generate the comments. Hosted on [Heroku](https://www.heroku.com/), and uses [offcial Twitter SDK](https://github.com/twitterdev/twitter-api-typescript-sdk) to interact with Twitter.
 
+**Note:** Right now, the bot is not deployed because Heroku removed its free tier and I can't find any other alternative that supports running a bot in the background. If you find one, connect me on Twitter [`roh1tkumar`](https://www.twitter.com/roh1tkumar)
 
-**Note:** mention `@bot_witty` in a tweet or under a tweet like below example.
+**Note:** mention `@bot_witty` in a tweet or under a tweet like below example. 
 
 <img src="https://i.imgur.com/kxUPBrm.png"  width=45% height=45%>
 
